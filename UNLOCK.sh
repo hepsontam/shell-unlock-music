@@ -57,6 +57,7 @@ n=1
 for name in ${names[*]}    
 do
 	echo -e "  $n   |   `echo $name | sed s/-/\ -\ /g`"
+	names[$n]=`echo $name | sed s/-/\ -\ /g`                             # 恢复原本名称
 	n=`expr $n + 1`
 done
 printf "%12s%-20s\n" '————————————' '——————————————————————————'
@@ -116,7 +117,6 @@ echo '----------------------------------------------------'
 m=1
 for content in ${unlock[*]}
 do
-	names[$content]=`echo ${names[$content]} | sed s/-/\ -\ /g`                             # 恢复原本名称
 	printf "%4s %4s   %s \t\t%c" "${m}/${#unlock[*]}" "$content" "${names[$content]}" '/'
 	sleep 0.09s
 	printf "\b%c" '-'           # \b 退1格；\r 退1行 
