@@ -5,7 +5,7 @@
 - 需要系统已配置`um`的环境变量（自行操作，注意赋予执行权限即可）。[[原下载地址]](https://github.com/unlock-music/cli/releases/tag/v0.0.5)、[[Apple M1版(个人编译)]](https://github.com/hepsontam/shell-unlock-music/raw/main/um)
 
 项目来源：[Unlock Music](https://github.com/unlock-music/unlock-music.git)、[Unlock Music-CLI](https://github.com/unlock-music/cli.git)
-<br>在此感谢作者的贡献！🙏🙏
+<br>在此感谢原作者的贡献！🙏🙏
 
 ## Feature of the script
 - [x] 设置音频文件所在路径
