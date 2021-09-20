@@ -52,7 +52,7 @@ then
 	exit
 fi
 
-# clear
+clear
 echo "当前路径：${dir[$i]}"
 echo
 printf "%12s%-20s\n" '————————————' '——————————————————————————'
