@@ -1,13 +1,19 @@
-# Unlock music in shell for macOS
-一个在macOS下解锁特殊格式音频文件的简单脚本，以达到一键调用解锁功能的效果（终端键入或双击打开）。脚本可能存在着不足，请见谅。
+# Unlock music in shell for macOS/Linux
+一个在macOS（兼容Linux）下解锁特殊格式音频文件的简单脚本，以达到一键调用解锁功能的效果（终端键入或双击打开）。脚本可能存在着不足，请见谅。
 
 ## Command Tool
 - 需要系统已部署`um`的环境。[[原下载地址]](https://github.com/unlock-music/cli/releases)、[[Apple M1版(个人编译)]](https://github.com/hepsontam/shell-unlock-music/raw/main/um)
 ```
-# 以macOS(非M1芯片)为例：下载；授权；软链接
+## 以macOS为例：下载
 
-curl -o um https://github.com/unlock-music/cli/releases/download/v0.0.5/um-darwin-amd64
-chmod +x um
+# M1芯片
+curl -o um https://ghproxy.com/https://github.com/hepsontam/shell-unlock-music/raw/main/um
+# 非M1芯片
+curl -o um https://ghproxy.com/https://github.com/unlock-music/cli/releases/download/v0.0.5/um-darwin-amd64
+
+## 授权；软链接
+
+chmod +x ./um
 sudo ln -s ./um /usr/bin
 ```
 
@@ -16,12 +22,12 @@ sudo ln -s ./um /usr/bin
 
 ## Usage
 ```
-# 下载并赋予执行权限
+## 下载并赋予执行权限
 
 curl -o UNLOCK.sh https://ghproxy.com/https://raw.githubusercontent.com/hepsontam/shell-unlock-music/main/UNLOCK.sh
 chmod +x ./UNLOCK.sh
 
-# 执行
+## 执行
 
 ./Unlock.sh
 ```
