@@ -10,14 +10,20 @@ echo '🍷 欢迎使用本程序，此程序用于解锁特殊格式音频文件
 echo
 echo '请选择歌曲所属文件夹⬇️：'
 echo '[1] 酷狗音乐/SQ   [2] 酷狗音乐/HQ   [3] 酷狗音乐/BQ   [4] 自定义路径'
-read i
+read -p '⇢ ' i
 
 # 判断
-if [ $i -eq 4 ]
+if [[ $i -eq 4 ]]
 then
 	echo '请输入文件夹的绝对路径⬇️：'
-	read dir[4]
-elif [ $i -lt 1 ] || [ $i -gt 4 ]
+	read -p '⇢ ' dir[4]
+	if [[ -z ${dir[4]} ]]
+	then
+		i=0
+	fi
+fi
+
+if [[ $i -lt 1 ]] || [[ $i -gt 4 ]] 
 then
 	echo
 	echo '❗️ 未选择路径，程序即将退出...'
@@ -28,9 +34,8 @@ fi
 n=1                    # 初始化
 for ((m=1;m<11;m++))   # 遍历格式
 do
-	if [ `ls ${dir[$i]} | grep "${format[$m]}" | wc -l` -gt 0 ]
+	if [[ `ls ${dir[$i]} | grep "${format[$m]}" | wc -l` -gt 0 ]]
 	then
-		sum=`expr $sum + $(ls ${dir[$i]} | grep "${format[$m]}" | wc -l)`
 		for line in `ls ${dir[$i]} | grep "${format[$m]}" | sed s,\ -\ ,-,g` # 为了使系统能正确识别内容，暂时将空格去掉
 		do
 			names[$n]=$line
@@ -39,7 +44,7 @@ do
 	fi
 done
 
-if [ ${#names[*]} -eq 0 ]
+if [[ -z ${names[*]} ]]
 then
 	echo
 	echo '❓ 文件夹内并无可解锁内容，程序即将退出...'
@@ -47,7 +52,7 @@ then
 	exit
 fi
 
-clear
+# clear
 echo "当前路径：${dir[$i]}"
 echo
 printf "%12s%-20s\n" '————————————' '——————————————————————————'
@@ -64,22 +69,18 @@ printf "%12s%-20s\n" '————————————' '——————�
 echo '0.退出'
 echo
 echo '请输入需要解锁的曲目序号（可依次输入多项，默认解锁所有曲目）：'
+read -p '⇢ ' unlocktext
 
-read unlocktext
-
-if [ `echo ${unlocktext} | md5` == '897316929176464ebc9ad085f31e7284' ]  # 0则退出
-then
-	exit
-fi
-
-
-if [ ${#unlocktext} -eq 0 ]                      # 无输入（直接回车），则全选
+if [[ -z ${unlocktext} ]]                    # 无输入（直接回车），则全选
 then
 	unlocktext='1'
 	for ((m=2;m<=${#names[*]};m++))
 	do
 		unlocktext="$unlocktext $m"
 	done
+elif [[ ${unlocktext} = '0' ]]               # 0 则退出
+then
+	exit
 fi
 
 unlocktext=`echo ${unlocktext} | sed s/\ /,/g`   # 统一使用用为逗号分隔符，目的：输入时可用空格或逗号分隔
@@ -89,24 +90,25 @@ num=`echo ${unlocktext} | grep -o , | wc -l`     # 输入的解锁序号的数�
 for ((m=1;m<`expr $num + 2`;m++))            # 根据内容判定索引是否有效
 do
 	n=`echo ${unlocktext} | cut -d , -f $m`  # 获取解锁曲目的序号(数组)
-	if [ ${#names[$n]} -eq 0 ]
+	if [[ -z ${names[$n]} ]]
 	then
 		continue
 	fi
 	unlock[$m]=$n                            # 有指向内容则保存
 done
 
-if [ ${#unlock[*]} -eq 0 ]                   # unlock无内容（长度为0）则退出
+if [[ -z ${unlock[*]} ]]                     # unlock无内容（长度为0）则退出
 then
-	echo '输入序号有误，并未有选中的解锁曲目，程序即将推出...'
+	echo
+	echo '❗️ 输入序号有误，并未有选中的解锁曲目，程序即将推出...'
 	sleep 1s
 	exit
-elif [ `expr $num + 1` -gt ${#unlock[*]} ]
+elif [[ `expr $num + 1` -gt ${#unlock[*]} ]]
 then
 	echo '输入序号有误，已自动修正～'
 fi
 
-if [ ! -d $HOME/Desktop/unlock_music_output ] # 创建文件夹
+if [[ ! -d $HOME/Desktop/unlock_music_output ]] # 创建文件夹
 then
 	mkdir $HOME/Desktop/unlock_music_output
 fi
@@ -128,7 +130,7 @@ do
 	printf "\b%c" '|'
 	sleep 0.09s
 	m=`expr $m + 1`
-	if [ ${#info} -ne 12 ]      # ‘successfully’
+	if [[ ${#info} -ne 12 ]]    # ‘successfully’
 	then
 		printf "\b"
 		echo ❗️ 
