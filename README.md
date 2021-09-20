@@ -1,5 +1,8 @@
 # Unlock music in shell for macOS/Linux
-一个在macOS（兼容Linux）下解锁特殊格式音频文件的简单脚本，以达到一键调用解锁功能的效果（终端键入或双击打开）。脚本可能存在着不足，请见谅。
+一个在macOS（兼容Linux）下解锁特殊格式音频文件的简单脚本，以达到一键调用解锁功能的效果（终端键入或双击打开）。<br>脚本可能还存在着不足，请见谅。
+
+项目来源：[Unlock Music](https://github.com/unlock-music/unlock-music.git)、[Unlock Music-CLI](https://github.com/unlock-music/cli.git)
+<br>在此感谢原作者的贡献！🙏🙏
 
 ## Command Tool
 - 需要系统已部署`um`的环境。[[原下载地址]](https://github.com/unlock-music/cli/releases)、[[Apple M1版(个人编译)]](https://github.com/hepsontam/shell-unlock-music/raw/main/um)
@@ -16,9 +19,6 @@ curl -o um https://ghproxy.com/https://github.com/unlock-music/cli/releases/down
 chmod +x ./um
 sudo ln -s ./um /usr/bin
 ```
-
-项目来源：[Unlock Music](https://github.com/unlock-music/unlock-music.git)、[Unlock Music-CLI](https://github.com/unlock-music/cli.git)
-<br>在此感谢原作者的贡献！🙏🙏
 
 ## Usage
 ```
